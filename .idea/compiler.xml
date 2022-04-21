@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CA2backend" options="-endorseddirs C:\Users\fiske\Desktop\ThreadExercises\CA2backend\target/endorsed" />
+      <module name="CA2backend" options="-endorseddirs C:\Users\mohae\Desktop\CA2Backend\target/endorsed" />
     </option>
   </component>
 </project>

@@ -1,7 +1,10 @@
 package rest;
 
 import com.google.gson.Gson;
+import entities.Boat;
+import entities.Owner;
 import entities.User;
+import facades.UserFacade;
 import utils.EMF_Creator;
 import utils.ParallelJokes;
 
@@ -9,21 +12,18 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @Path("info")
 public class Resource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    UserFacade userFacade = UserFacade.getUserFacade(EMF_Creator.createEntityManagerFactory());
+    Gson gson = new Gson();
+
     @Context
     private UriInfo context;
 
@@ -87,4 +87,53 @@ public class Resource {
 
         return gson.toJson(jokeList);
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("owners")
+    public String getOwners() {
+
+        Gson gson = new Gson();
+
+        List<Owner> ownerList = userFacade.getAllOwners();
+        List<String> ownerNames = new ArrayList<>();
+
+        for (int i = 0; i < ownerList.size(); i++) {
+            ownerNames.add(ownerList.get(i).getName());
+        }
+
+        try{
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return gson.toJson(ownerNames);
+    }
+
+
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Path("boat")
+//    public Boat createBoat(String content) {
+//        Boat boat = gson.fromJson(content, Boat.class);
+//
+//
+////        return Response
+////                .ok()
+////                .entity(gson.toJson(boat))
+////                .build();
+//        return userFacade.createBoat(boat.getBrand(), boat.getMake(), boat.getName());
+//    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("boat")
+    public Boat createBoat(String content) {
+        Boat boat = gson.fromJson(content,Boat.class);
+
+        return userFacade.createBoat(boat.getBrand(), boat.getMake(), boat.getName());
+    }
+
 }

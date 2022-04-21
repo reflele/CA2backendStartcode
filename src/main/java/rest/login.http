@@ -13,3 +13,23 @@ GET http://localhost:8080/CA2backend_war_exploded/api/all
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
+
+###
+POST https://lightybrighty.com/CA2backend/api/login
+
+{username: "user", password: "test123"}
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/owners
+
+###
+GET https://lightybrighty.com/CA2backend/api/info/owners
+
+
+###
+POST http://localhost:8080/CA2backend_war_exploded/api/info/boat
+
+{
+brand: "tes99td123",
+make: "Sirm99jje",
+name: "test12d99d3"
+}

@@ -4,6 +4,8 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
+        <class>entities.Boat</class>
+        <class>entities.Owner</class>
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--    <class>entities.RenameMe</class>-->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
@@ -51,4 +53,5 @@
             <property name="eclipselink.logging.parameters" value="true"/>
         </properties>
     </persistence-unit>
+    <persistence-unit name="Owner"/>
 </persistence>
